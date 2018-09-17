@@ -110,7 +110,6 @@ namespace JPBotelho
                     }                
                     else if(i < splinePoints.Length - 1)
                     {
-                        //Debug.Log(splinePoints[i].position);
                         Debug.DrawLine(splinePoints[i].position, splinePoints[i+1].position, color);
                     }
                 }
