@@ -21,7 +21,7 @@ public class SplineMover : MonoBehaviour {
     public float tangentExtrusion;
 
     [Range(0, 1)]
-    public float time = 0;
+    public float time = 0f;
 
     private float timeStep;
 
@@ -29,56 +29,55 @@ public class SplineMover : MonoBehaviour {
 
     // -----------------
     public int currentSegmentDisplay = 0;
-    public float currentProgressDisplay = 0f;
-    public float rotationSpeed = 2.5f;
 
     // ------------------
 
-    void Start() {
-        if (spline == null) {
+    void Start()
+    {
+        if (spline == null)
+        {
             spline = new JPBotelho.CatmullRom(controlPoints, resolution, closedLoop);
         }
 
     }
 
 
-    private void UpdatePosition(float progress) {
+    private void UpdatePosition(float time)
+    {
         float l = spline.GetPoints().Length - 2;
         timeStep = 1.0f / l;
         int currentSegment = Mathf.CeilToInt(time / timeStep);
         //currentSegment = Mathf.Min(currentSegment, spline.GetPoints().Length - 1);
 
-        float currentProgress = (progress % timeStep / timeStep);
+        float currentProgress = (time % timeStep / timeStep);
+
 
         currentSegmentDisplay = currentSegment;
-        currentProgressDisplay = currentProgress;
         //Debug.Log(time % timeStep);
-        //Debug.Log(currentTime);
 
-        if (currentSegment < l + 1) {
+        if (currentSegment < l + 1)
+        {
 
             Vector3 posStart = spline.GetPoints()[currentSegment].position;
-            //Vector3 tanStart = spline.GetPoints()[currentSegment].tangent;
-            Vector3 tanStart = new Vector3(0,0,0);
+            Vector3 tanStart = spline.GetPoints()[currentSegment].tangent;
 
             Vector3 posEnd = spline.GetPoints()[currentSegment + 1].position;
-            //Vector3 tanEnd = spline.GetPoints()[currentSegment + 1].tangent;
-            Vector3 tanEnd = new Vector3(0, 0, 0);
+            Vector3 tanEnd = spline.GetPoints()[currentSegment + 1].tangent;
 
             Vector3 segmentPosition = JPBotelho.CatmullRom.CalculatePosition(posStart, posEnd, tanStart, tanEnd, currentProgress);
             Vector3 segmentTangent = JPBotelho.CatmullRom.CalculateTangent(posStart, posEnd, tanStart, tanEnd, currentProgress);
 
-            transform.position = segmentPosition;
-            //transform.rotation = Quaternion.LookRotation(segmentTangent);
-            //transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(segmentTangent), Time.deltaTime * rotationSpeed);
-            //transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(segmentTangent), currentTime); 
+            transform.position = Vector3.Lerp(posStart, posEnd, currentProgress);
+            transform.rotation = Quaternion.Slerp(Quaternion.LookRotation(tanStart), Quaternion.LookRotation(tanEnd), currentProgress);
         }
 
 
     }
 
-    void Update() {
-        if (spline != null) {
+    void Update()
+    {
+        if (spline != null)
+        {
             spline.Update(controlPoints);
             spline.Update(resolution, closedLoop);
             spline.DrawSpline(Color.white);
@@ -88,7 +87,9 @@ public class SplineMover : MonoBehaviour {
 
             if (drawTangent)
                 spline.DrawTangents(tangentExtrusion, Color.cyan);
-        } else {
+        }
+        else
+        {
             spline = new JPBotelho.CatmullRom(controlPoints, resolution, closedLoop);
         }
 
@@ -96,9 +97,12 @@ public class SplineMover : MonoBehaviour {
 
 
 
-        if (time < 1) {
-            time += Time.deltaTime / 10f;
-        } else {
+        if (time < 1)
+        {
+            time += Time.deltaTime * .1f;
+        }
+        else
+        {
             time = 0;
         }
 

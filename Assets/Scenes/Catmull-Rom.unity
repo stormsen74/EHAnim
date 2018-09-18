@@ -146,23 +146,22 @@ MonoBehaviour:
   - {fileID: 605548591}
   - {fileID: 372236222}
   - {fileID: 422484121}
-  resolution: 20
+  resolution: 8
   closedLoop: 0
-  normalExtrusion: 0
-  tangentExtrusion: 0
-  time: 0.88381404
+  normalExtrusion: 20
+  tangentExtrusion: 20
+  time: 0.48600468
   drawNormal: 0
   drawTangent: 0
-  currentSegmentDisplay: 69
-  rotationSpeed: 2.5
+  currentSegmentDisplay: 15
 --- !u!4 &54994004
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 54994002}
-  m_LocalRotation: {x: 0, y: 0.9164572, z: 0, w: 0.40013283}
-  m_LocalPosition: {x: 166.84395, y: 0, z: 26.91226}
+  m_LocalRotation: {x: 0, y: 0.70721006, z: 0, w: 0.70700353}
+  m_LocalPosition: {x: 82.51813, y: 0, z: 31.256542}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 781363845}
