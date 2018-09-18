@@ -27,8 +27,8 @@ namespace JPBotelho {
 
         // -----------------
         public int currentWaypointID = 0;
-        public float speed;
-        public float rotationSpeed = 5.0f;
+        public float speed = 10;
+        public float rotationSpeed = 2.5f;
         public float reachDistance = 1.0f;
 
         Vector3 lastPosition;
@@ -42,6 +42,11 @@ namespace JPBotelho {
             }
 
             lastPosition = transform.position;
+
+            Debug.Log(spline.GetPoints()[1].position);
+            Debug.Log(spline.GetPoints()[1].tangent);
+
+
 
         }
 
@@ -78,6 +83,8 @@ namespace JPBotelho {
 
             if (currentWaypointID >= spline.GetPoints().Length) {
                 currentWaypointID = 0;
+                transform.position = spline.GetPoints()[currentWaypointID].position;
+                transform.rotation = Quaternion.LookRotation(spline.GetPoints()[currentWaypointID].position - transform.position);
             }
         }
     }

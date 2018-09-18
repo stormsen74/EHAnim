@@ -17,7 +17,7 @@ public class MoveOnPath : MonoBehaviour {
     void Start() {
 
         // pathToFollow = GameObject.Find(pathName).GetComponent<EditorPathScript>();
-        lastPosition = transform.position;
+        // lastPosition = transform.position;
     }
 
     void Update() {
