@@ -3,7 +3,6 @@ using UnityEngine;
 
 // https://www.habrador.com/tutorials/interpolation/1-catmull-rom-splines/
 
-namespace JPBotelho {
     [ExecuteInEditMode]
     public class SplineTester : MonoBehaviour {
         public CatmullRom spline;
@@ -37,23 +36,18 @@ namespace JPBotelho {
         // ------------------
 
         void Start() {
+            
             if (spline == null) {
-                spline = new CatmullRom(controlPoints, resolution, closedLoop);
+                spline = new CatmullRom(controlPoints, resolution);
             }
 
             lastPosition = transform.position;
-
-            Debug.Log(spline.GetPoints()[1].position);
-            Debug.Log(spline.GetPoints()[1].tangent);
-
-
-
         }
 
         void Update() {
             if (spline != null) {
                 spline.Update(controlPoints);
-                spline.Update(resolution, closedLoop);
+                spline.Update(resolution);
                 spline.DrawSpline(Color.white);
 
                 if (drawNormal)
@@ -62,7 +56,7 @@ namespace JPBotelho {
                 if (drawTangent)
                     spline.DrawTangents(tangentExtrusion, Color.cyan);
             } else {
-                spline = new CatmullRom(controlPoints, resolution, closedLoop);
+                spline = new CatmullRom(controlPoints, resolution);
             }
 
 
@@ -88,4 +82,3 @@ namespace JPBotelho {
             }
         }
     }
-}

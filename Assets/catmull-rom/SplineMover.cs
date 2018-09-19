@@ -6,66 +6,64 @@ using UnityEngine;
 
 [ExecuteInEditMode]
 public class SplineMover : MonoBehaviour {
-    public JPBotelho.CatmullRom spline;
+    public CatmullRom spline;
 
     public Transform[] controlPoints;
 
     [Range(2, 25)]
-    public int resolution = 16;
-    public bool closedLoop;
+    public int resolution = 6;
 
     [Range(0, 20)]
-    public float normalExtrusion;
+    public float normalExtrusion = 20;
 
     [Range(0, 20)]
-    public float tangentExtrusion;
+    public float tangentExtrusion = 20;
 
     [Range(0, 1)]
-    public float time = 0f;
+    public float progress = 0f;
 
-    private float timeStep;
+    [Range(1, 20)]
+    public float duration = 5.0f;
+
 
     public bool drawNormal, drawTangent;
 
     // -----------------
+    private float timeStep, pointsLength, currentProgress;
+    private int currentSegment;
     public int currentSegmentDisplay = 0;
+
+    private TrailRenderer trail;
 
     // ------------------
 
-    void Start()
-    {
-        if (spline == null)
-        {
-            spline = new JPBotelho.CatmullRom(controlPoints, resolution, closedLoop);
-        }
+    void Start() {
 
+        trail = transform.GetComponentInChildren<TrailRenderer>();
+        Debug.Log(trail.emitting);
+
+        if (spline == null) {
+            spline = new CatmullRom(controlPoints, resolution);
+        }
     }
 
 
-    private void UpdatePosition(float time)
-    {
-        float l = spline.GetPoints().Length - 2;
-        timeStep = 1.0f / l;
-        int currentSegment = Mathf.CeilToInt(time / timeStep);
-        //currentSegment = Mathf.Min(currentSegment, spline.GetPoints().Length - 1);
-
-        float currentProgress = (time % timeStep / timeStep);
-
-
+    private void UpdatePosition(float time) {
+        pointsLength = spline.GetPoints().Length - 2;
+        timeStep = 1.0f / pointsLength;
+        currentSegment = Mathf.CeilToInt(time / timeStep);
+        currentProgress = (time % timeStep / timeStep);
         currentSegmentDisplay = currentSegment;
-        //Debug.Log(time % timeStep);
 
-        if (currentSegment < l + 1)
-        {
-
+        if (currentSegment < pointsLength + 1) {
             Vector3 posStart = spline.GetPoints()[currentSegment].position;
             Vector3 tanStart = spline.GetPoints()[currentSegment].tangent;
 
             Vector3 posEnd = spline.GetPoints()[currentSegment + 1].position;
             Vector3 tanEnd = spline.GetPoints()[currentSegment + 1].tangent;
 
-            Vector3 segmentPosition = JPBotelho.CatmullRom.CalculatePosition(posStart, posEnd, tanStart, tanEnd, currentProgress);
-            Vector3 segmentTangent = JPBotelho.CatmullRom.CalculateTangent(posStart, posEnd, tanStart, tanEnd, currentProgress);
+            Vector3 segmentPosition = CatmullRom.CalculatePosition(posStart, posEnd, tanStart, tanEnd, currentProgress);
+            Vector3 segmentTangent = CatmullRom.CalculateTangent(posStart, posEnd, tanStart, tanEnd, currentProgress);
 
             transform.position = Vector3.Lerp(posStart, posEnd, currentProgress);
             transform.rotation = Quaternion.Slerp(Quaternion.LookRotation(tanStart), Quaternion.LookRotation(tanEnd), currentProgress);
@@ -74,12 +72,15 @@ public class SplineMover : MonoBehaviour {
 
     }
 
-    void Update()
-    {
-        if (spline != null)
-        {
+
+    private float GetTimeScale() {
+        return 1 / duration;
+    }
+
+    void Update() {
+        if (spline != null) {
             spline.Update(controlPoints);
-            spline.Update(resolution, closedLoop);
+            spline.Update(resolution);
             spline.DrawSpline(Color.white);
 
             if (drawNormal)
@@ -87,25 +88,23 @@ public class SplineMover : MonoBehaviour {
 
             if (drawTangent)
                 spline.DrawTangents(tangentExtrusion, Color.cyan);
-        }
-        else
-        {
-            spline = new JPBotelho.CatmullRom(controlPoints, resolution, closedLoop);
+        } else {
+            spline = new CatmullRom(controlPoints, resolution);
         }
 
 
 
-
-
-        if (time < 1)
-        {
-            time += Time.deltaTime * .1f;
+        if (progress < 1) {
+            progress += Time.deltaTime * GetTimeScale();
+            if (!trail.emitting) {
+                trail.Clear();
+                trail.emitting = true;
+            }
+        } else {
+            progress = .01f;
+            trail.emitting = false;
         }
-        else
-        {
-            time = 0;
-        }
 
-        UpdatePosition(time);
+        UpdatePosition(progress);
     }
 }
