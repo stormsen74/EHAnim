@@ -150,19 +150,20 @@ MonoBehaviour:
   resolution: 10
   normalExtrusion: 20
   tangentExtrusion: 20
-  progress: 0.9869052
+  progress: 0.21383172
+  vesselSpeed: 0.132
   duration: 15
   drawNormal: 0
   drawTangent: 0
-  currentSegmentDisplay: 48
+  currentSegmentDisplay: 11
 --- !u!4 &54994004
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 54994002}
-  m_LocalRotation: {x: 0, y: 0.3679105, z: 0, w: 0.9298612}
-  m_LocalPosition: {x: 182.79912, y: 0, z: 43.40866}
+  m_LocalRotation: {x: 0, y: 0.4063258, z: 0, w: 0.9137283}
+  m_LocalPosition: {x: 29.19137, y: 0, z: 45.21911}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 781363845}

@@ -22,6 +22,9 @@ public class SplineMover : MonoBehaviour {
     [Range(0, 1)]
     public float progress = 0f;
 
+    [Range(0, 1)]
+    public float vesselSpeed = 0f;
+
     [Range(1, 20)]
     public float duration = 5.0f;
 
@@ -77,6 +80,11 @@ public class SplineMover : MonoBehaviour {
         return 1 / duration;
     }
 
+    private float GetSpeed()
+    {
+        return vesselSpeed;
+    }
+
     void Update() {
         if (spline != null) {
             spline.Update(controlPoints);
@@ -95,7 +103,7 @@ public class SplineMover : MonoBehaviour {
 
 
         if (progress < 1) {
-            progress += Time.deltaTime * GetTimeScale();
+            progress += Time.deltaTime * GetSpeed();
             if (!trail.emitting) {
                 trail.Clear();
                 trail.emitting = true;
