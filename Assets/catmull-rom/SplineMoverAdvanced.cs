@@ -5,10 +5,10 @@ using UnityEngine;
 
 
 [ExecuteInEditMode]
-public class SplineMover : MonoBehaviour {
+public class SplineMoverAdvanced : MonoBehaviour {
     public CatmullRom spline;
 
-    public Transform[] controlPoints;
+    public Transform pointHolder;
 
     [Range(2, 25)]
     public int resolution = 6;
@@ -29,7 +29,7 @@ public class SplineMover : MonoBehaviour {
     public float duration = 5.0f;
 
 
-    public bool drawNormal, drawTangent;
+    public bool drawNormal, drawTangent, showControlPoints;
 
     // -----------------
     private float timeStep, pointsLength, currentProgress;
@@ -37,6 +37,7 @@ public class SplineMover : MonoBehaviour {
     public int currentSegmentDisplay = 0;
 
     private TrailRenderer trail;
+    private Transform[] controlPoints;
 
     // ------------------
 
@@ -44,9 +45,26 @@ public class SplineMover : MonoBehaviour {
 
         trail = transform.GetComponentInChildren<TrailRenderer>();
 
-        if (spline == null) {
+        controlPoints = new Transform[pointHolder.childCount];
+        for (int i = 0; i < controlPoints.Length; i++) {
+            controlPoints[i] = pointHolder.GetChild(i);
+        }
+
+        if (showControlPoints) {
+            for (int i = 0; i < controlPoints.Length; i++) {
+                controlPoints[i].GetChild(0).localScale = new Vector3(.05f, .05f, .05f);
+            }
+        } else {
+            for (int i = 0; i < controlPoints.Length; i++) {
+                controlPoints[i].GetChild(0).localScale = new Vector3(.0f, .0f, .0f);
+            }
+        }
+
+
+        if (spline == null && controlPoints.Length > 2) {
             spline = new CatmullRom(controlPoints, resolution);
         }
+
     }
 
 
@@ -102,16 +120,13 @@ public class SplineMover : MonoBehaviour {
 
         if (progress < 1) {
             progress += Time.deltaTime * GetSpeed();
-            if (trail) {
-                if (!trail.emitting) {
-                    trail.Clear();
-                    trail.emitting = true;
-                }
-
+            if (!trail.emitting) {
+                trail.Clear();
+                trail.emitting = true;
             }
         } else {
             progress = .01f;
-            if (trail) trail.emitting = false;
+            trail.emitting = false;
         }
 
         UpdatePosition(progress);
