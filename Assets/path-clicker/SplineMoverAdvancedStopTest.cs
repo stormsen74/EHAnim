@@ -5,7 +5,7 @@ using UnityEngine;
 
 
 [ExecuteInEditMode]
-public class SplineMoverAdvanced : MonoBehaviour {
+public class SplineMoverAdvancedStopTest : MonoBehaviour {
     public CatmullRom spline;
 
     public Transform pointHolder;
@@ -33,7 +33,7 @@ public class SplineMoverAdvanced : MonoBehaviour {
 
     // -----------------
     private float timeStep, pointsLength, currentProgress;
-    private int currentSegment;
+    private int currentSegment, currentPathSegment;
     public int currentPathSegmentDisplay = 0;
     public int currentSegmentDisplay = 0;
 
@@ -49,6 +49,7 @@ public class SplineMoverAdvanced : MonoBehaviour {
         controlPoints = new Transform[pointHolder.childCount];
         for (int i = 0; i < controlPoints.Length; i++) {
             controlPoints[i] = pointHolder.GetChild(i);
+            //Debug.Log(controlPoints[i].transform.position.x);
         }
 
         if (showControlPoints) {
@@ -73,9 +74,10 @@ public class SplineMoverAdvanced : MonoBehaviour {
         pointsLength = spline.GetPoints().Length - 2;
         timeStep = 1.0f / pointsLength;
         currentSegment = Mathf.CeilToInt(time / timeStep);
+        currentPathSegment = currentSegment / resolution;
         currentProgress = (time % timeStep / timeStep);
         currentSegmentDisplay = currentSegment;
-        currentPathSegmentDisplay = currentSegment / resolution;
+        currentPathSegmentDisplay = currentPathSegment;
 
         if (currentSegment < pointsLength + 1) {
             Vector3 posStart = spline.GetPoints()[currentSegment].position;
@@ -87,8 +89,31 @@ public class SplineMoverAdvanced : MonoBehaviour {
             Vector3 segmentPosition = CatmullRom.CalculatePosition(posStart, posEnd, tanStart, tanEnd, currentProgress);
             Vector3 segmentTangent = CatmullRom.CalculateTangent(posStart, posEnd, tanStart, tanEnd, currentProgress);
 
-            transform.position = Vector3.Lerp(posStart, posEnd, currentProgress);
-            transform.rotation = Quaternion.Slerp(Quaternion.LookRotation(tanStart), Quaternion.LookRotation(tanEnd), currentProgress);
+            if (currentPathSegment < 5 || currentPathSegment > 9) {
+                transform.rotation = Quaternion.Slerp(Quaternion.LookRotation(tanStart), Quaternion.LookRotation(tanEnd), currentProgress);
+                transform.position = Vector3.Lerp(posStart, posEnd, currentProgress);
+            }
+            if (currentPathSegment == 9) {
+                //Debug.Log(transform.eulerAngles.y);
+                Debug.Log(transform.rotation);
+                Debug.Log(Quaternion.LookRotation(spline.GetPoints()[1].tangent).y);
+                Debug.Log(Quaternion.LookRotation(tanEnd).y);
+
+
+                Vector3 ip = Vector3.Lerp(tanStart, tanEnd, currentProgress);
+
+
+
+                transform.rotation = Quaternion.LookRotation(tanEnd);
+
+                //transform.position = Vector3.Lerp(posStart, posEnd, currentProgress);
+            }
+
+            //if (currentPathSegment > 9) {
+            //    transform.rotation = Quaternion.Slerp(Quaternion.LookRotation(tanStart), Quaternion.LookRotation(tanEnd), currentProgress);
+            //    transform.position = Vector3.Lerp(posStart, posEnd, currentProgress);
+            //}
+
         }
 
 
@@ -126,13 +151,10 @@ public class SplineMoverAdvanced : MonoBehaviour {
 
         if (progress <= 1) {
             progress += Time.deltaTime * UpdateProgress();
-            //if (!trail.emitting) {
-                //trail.Clear();
-                //trail.emitting = true;
-            //}
+
+
         } else {
             progress = .001f;
-            //trail.emitting = false;
         }
 
         UpdatePosition(progress);
