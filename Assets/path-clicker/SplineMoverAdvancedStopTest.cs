@@ -37,8 +37,11 @@ public class SplineMoverAdvancedStopTest : MonoBehaviour {
     public int currentPathSegmentDisplay = 0;
     public int currentSegmentDisplay = 0;
 
-    private TrailRenderer trail;
     private Transform[] controlPoints;
+
+    private int stopStart = 0;
+    private int stopEnd = 0;
+
 
     // ------------------
 
@@ -70,6 +73,7 @@ public class SplineMoverAdvancedStopTest : MonoBehaviour {
     }
 
 
+
     private void UpdatePosition(float time) {
 
         pointsLength = spline.GetPoints().Length - 2;
@@ -80,27 +84,32 @@ public class SplineMoverAdvancedStopTest : MonoBehaviour {
         currentSegmentDisplay = currentSegment;
         currentPathSegmentDisplay = currentPathSegment;
 
-        int[] stops = new int[2];
-        stops[0] = 6;
-        stops[1] = 10 - 1;
 
         if (currentSegment < pointsLength + 1) {
+
             Vector3 posStart = spline.GetPoints()[currentSegment].position;
             Vector3 tanStart = spline.GetPoints()[currentSegment].tangent;
 
             Vector3 posEnd = spline.GetPoints()[currentSegment + 1].position;
             Vector3 tanEnd = spline.GetPoints()[currentSegment + 1].tangent;
 
-            if (currentPathSegment < stops[0] || currentPathSegment > stops[1]) {
-                transform.rotation = Quaternion.Slerp(Quaternion.LookRotation(tanStart), Quaternion.LookRotation(tanEnd), currentProgress);
+            Quaternion qStart = Quaternion.LookRotation(tanStart);
+            Quaternion qEnd = Quaternion.LookRotation(tanEnd);
+
+            if (qEnd.eulerAngles.y != 0 && qStart.eulerAngles.y != 0) {
+                transform.rotation = Quaternion.Slerp(qStart, qEnd, currentProgress);
                 transform.position = Vector3.Lerp(posStart, posEnd, currentProgress);
+                if (currentSegment == stopEnd + 1) {
+                    transform.rotation = Quaternion.Slerp(Quaternion.LookRotation(spline.GetPoints()[stopStart].tangent), Quaternion.LookRotation(spline.GetPoints()[stopEnd + 1].tangent), currentProgress);
+                } else {
+                    stopStart = 0;
+                    stopEnd = 0;
+                }
+            } else {
+                // get last and first valid segment ...
+                if (stopStart == 0) stopStart = currentSegment;
+                if (stopEnd < currentSegment) stopEnd = currentSegment;
             }
-
-            if (currentSegment == stops[1] * resolution) {
-                int lastSegment = (stops[0] + 1) * resolution - 1;
-                transform.rotation = Quaternion.Slerp(Quaternion.LookRotation(spline.GetPoints()[lastSegment].tangent), Quaternion.LookRotation(tanEnd), currentProgress);
-            }
-
 
         }
 

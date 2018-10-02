@@ -4521,23 +4521,23 @@ MonoBehaviour:
   resolution: 5
   normalExtrusion: 0.4
   tangentExtrusion: 0.3
-  progress: 0.32905403
+  progress: 0.58701766
   vesselSpeed: 0.028
   duration: 20
   drawNormal: 0
   drawTangent: 0
   showControlPoints: 1
   useDuration: 1
-  currentPathSegmentDisplay: 6
-  currentSegmentDisplay: 33
+  currentPathSegmentDisplay: 11
+  currentSegmentDisplay: 58
 --- !u!4 &1121130021
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1121130019}
-  m_LocalRotation: {x: 0, y: -0.49578068, z: 0, w: 0.8684478}
-  m_LocalPosition: {x: 6.981288, y: 0, z: -2.0426292}
+  m_LocalRotation: {x: 0, y: -0.4952256, z: 0, w: 0.8687644}
+  m_LocalPosition: {x: 6.1445017, y: 0, z: -1.6608249}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1487649711}
@@ -6400,23 +6400,23 @@ MonoBehaviour:
   resolution: 5
   normalExtrusion: 0.2
   tangentExtrusion: 0.2
-  globalTime: 0.2899546
+  globalTime: 0.16415061
   vesselSpeed: 0
-  duration: 20
+  duration: 40
   drawNormal: 1
   drawTangent: 0
   showControlPoints: 1
   useDuration: 1
-  currentPathSegmentDisplay: 5
-  currentSegmentDisplay: 26
+  currentPathSegmentDisplay: 3
+  currentSegmentDisplay: 15
 --- !u!4 &1562793259
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1562793257}
-  m_LocalRotation: {x: 0, y: -0.009951131, z: 0, w: 0.9999505}
-  m_LocalPosition: {x: 1.9115142, y: 0, z: -4.092134}
+  m_LocalRotation: {x: 0, y: -0.10234101, z: 0, w: 0.99474937}
+  m_LocalPosition: {x: 2.0372326, y: 0, z: -4.47538}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 997803106}
@@ -8835,23 +8835,23 @@ MonoBehaviour:
   resolution: 5
   normalExtrusion: 20
   tangentExtrusion: 20
-  progress: 0.52941316
+  progress: 0.16185178
   vesselSpeed: 0.028
   duration: 15
   drawNormal: 0
   drawTangent: 0
   showControlPoints: 1
   useDuration: 0
-  currentPathSegmentDisplay: 16
-  currentSegmentDisplay: 82
+  currentPathSegmentDisplay: 5
+  currentSegmentDisplay: 25
 --- !u!4 &2031995332
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2031995330}
-  m_LocalRotation: {x: 0, y: -0.24865554, z: 0, w: 0.968592}
-  m_LocalPosition: {x: 1.4019133, y: 0, z: -2.0792317}
+  m_LocalRotation: {x: 0, y: 0.979823, z: 0, w: 0.19986747}
+  m_LocalPosition: {x: 1.0335853, y: 0, z: -2.1905031}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 985166536}
