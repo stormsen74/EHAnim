@@ -29,7 +29,7 @@ public class CatmullRom {
 
     private CatmullRomPoint[] splinePoints; //Generated spline points
 
-    private Vector3[] controlPoints;
+    public Vector3[] controlPoints;
 
     //Returns spline points. Count is contorolPoints * resolution + [resolution] points if closed loop.
     public CatmullRomPoint[] GetPoints() {

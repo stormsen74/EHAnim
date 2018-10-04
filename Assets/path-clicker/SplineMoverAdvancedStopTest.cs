@@ -68,6 +68,7 @@ public class SplineMoverAdvancedStopTest : MonoBehaviour {
 
         if (spline == null && controlPoints.Length > 2) {
             spline = new CatmullRom(controlPoints, resolution);
+            Debug.Log(spline.controlPoints[3] == spline.controlPoints[4]);
         }
 
     }
@@ -93,23 +94,60 @@ public class SplineMoverAdvancedStopTest : MonoBehaviour {
             Vector3 posEnd = spline.GetPoints()[currentSegment + 1].position;
             Vector3 tanEnd = spline.GetPoints()[currentSegment + 1].tangent;
 
-            Quaternion qStart = Quaternion.LookRotation(tanStart);
-            Quaternion qEnd = Quaternion.LookRotation(tanEnd);
+            //Quaternion qStart = Quaternion.LookRotation(tanStart);
+            //Quaternion qEnd = Quaternion.LookRotation(tanEnd);
 
-            if (qEnd.eulerAngles.y != 0 && qStart.eulerAngles.y != 0) {
-                transform.rotation = Quaternion.Slerp(qStart, qEnd, currentProgress);
-                transform.position = Vector3.Lerp(posStart, posEnd, currentProgress);
-                if (currentSegment == stopEnd + 1) {
-                    transform.rotation = Quaternion.Slerp(Quaternion.LookRotation(spline.GetPoints()[stopStart].tangent), Quaternion.LookRotation(spline.GetPoints()[stopEnd + 1].tangent), currentProgress);
-                } else {
-                    stopStart = 0;
-                    stopEnd = 0;
-                }
+            //if(posStart == posEnd);
+
+            //Debug.Log(tanStart.magnitude);
+
+            //if (spline.controlPoints[currentPathSegment] == spline.controlPoints[currentPathSegment + 1]) {
+            //    Debug.Log(currentSegment);
+            //} else {
+            //    if (currentSegment == 29 + 1) {
+            //        transform.position = Vector3.Lerp(transform.position, posEnd, currentProgress);
+            //        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(tanEnd), currentProgress);
+            //    } else {
+            //        transform.position = Vector3.Lerp(posStart, posEnd, currentProgress);
+            //        transform.rotation = Quaternion.Slerp(Quaternion.LookRotation(tanStart), Quaternion.LookRotation(tanEnd), currentProgress);
+            //    }
+            //}
+
+            if (spline.controlPoints[currentPathSegment] == spline.controlPoints[currentPathSegment + 1]) {
             } else {
-                // get last and first valid segment ...
-                if (stopStart == 0) stopStart = currentSegment;
-                if (stopEnd < currentSegment) stopEnd = currentSegment;
+                transform.position = Vector3.Lerp(posStart, posEnd, currentProgress);
+                transform.rotation = Quaternion.Slerp(Quaternion.LookRotation(tanStart), Quaternion.LookRotation(tanEnd), currentProgress);
             }
+
+
+            //if (tanStart.magnitude != 0 && tanEnd.magnitude != 0) {
+
+
+            //} else {
+            //    // get last and first valid segment ...
+            //    if (stopStart == 0) stopStart = currentSegment;
+            //    if (stopEnd < currentSegment) stopEnd = currentSegment;
+            //}
+
+
+
+
+            //if (qEnd.eulerAngles.y != 0 && qStart.eulerAngles.y != 0) {
+            //    transform.rotation = Quaternion.Slerp(qStart, qEnd, currentProgress);
+            //    transform.position = Vector3.Lerp(posStart, posEnd, currentProgress);
+            //    if (currentSegment == stopEnd + 1) {
+            //        transform.rotation = Quaternion.Slerp(Quaternion.LookRotation(spline.GetPoints()[stopStart].tangent), Quaternion.LookRotation(spline.GetPoints()[stopEnd + 1].tangent), currentProgress);
+            //    } else {
+            //        stopStart = 0;
+            //        stopEnd = 0;
+            //    }
+            //} else {
+            //    // get last and first valid segment ...
+            //    if (stopStart == 0) stopStart = currentSegment;
+            //    if (stopEnd < currentSegment) stopEnd = currentSegment;
+            //}
+
+
 
         }
 
