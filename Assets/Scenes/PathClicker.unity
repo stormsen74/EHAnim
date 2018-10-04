@@ -683,7 +683,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 169636555}
   m_LocalRotation: {x: -0, y: 0.010148674, z: -0, w: 0.9999485}
-  m_LocalPosition: {x: 3.458, y: 0, z: -5.13}
+  m_LocalPosition: {x: 3.376, y: 0, z: -5.059}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 128474230}
@@ -2519,7 +2519,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 853600486}
   m_LocalRotation: {x: -0, y: 0.010148674, z: -0, w: 0.9999485}
-  m_LocalPosition: {x: 3.458, y: 0, z: -5.13}
+  m_LocalPosition: {x: 3.376, y: 0, z: -5.059}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1411631088}
@@ -2577,7 +2577,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 906459100}
   m_LocalRotation: {x: -0, y: 0.010148674, z: -0, w: 0.9999485}
-  m_LocalPosition: {x: 3.458, y: 0, z: -5.13}
+  m_LocalPosition: {x: 3.376, y: 0, z: -5.059}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 989978513}
@@ -3884,23 +3884,23 @@ MonoBehaviour:
   resolution: 5
   normalExtrusion: 0.4
   tangentExtrusion: 0.3
-  progress: 0.35277706
+  progress: 0.98116845
   vesselSpeed: 0.028
   duration: 20
   drawNormal: 0
   drawTangent: 0
   showControlPoints: 1
   useDuration: 1
-  currentPathSegmentDisplay: 7
-  currentSegmentDisplay: 35
+  currentPathSegmentDisplay: 19
+  currentSegmentDisplay: 97
 --- !u!4 &1121130021
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1121130019}
-  m_LocalRotation: {x: 0, y: -0.50762725, z: 0, w: 0.8615768}
-  m_LocalPosition: {x: 6.909239, y: 0, z: -2.001044}
+  m_LocalRotation: {x: 0, y: -0.56561375, z: 0, w: 0.8246703}
+  m_LocalPosition: {x: 4.5383396, y: 0, z: -1.0366019}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1487649711}
@@ -5617,26 +5617,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pointHolder: {fileID: 59022473}
-  resolution: 5
+  resolution: 6
   normalExtrusion: 0.2
   tangentExtrusion: 0.38
-  globalTime: 0.49319586
+  globalTime: 0.12185198
   vesselSpeed: 0.158
   duration: 20
   drawNormal: 1
   drawTangent: 0
   showControlPoints: 1
   useDuration: 1
-  currentPathSegmentDisplay: 3
-  currentSegmentDisplay: 17
+  currentPathSegmentDisplay: 0
+  currentSegmentDisplay: 5
 --- !u!4 &1562793259
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1562793257}
-  m_LocalRotation: {x: 0, y: 0.17625752, z: 0, w: 0.9843441}
-  m_LocalPosition: {x: 3.246515, y: 0, z: -5.244302}
+  m_LocalRotation: {x: 0, y: 0.19245318, z: 0, w: 0.9813062}
+  m_LocalPosition: {x: 2.836212, y: 0, z: -5.3588758}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 997803106}
@@ -6878,7 +6878,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1835100301}
   m_LocalRotation: {x: -0, y: 0.010148674, z: -0, w: 0.9999485}
-  m_LocalPosition: {x: 3.458, y: 0, z: -5.13}
+  m_LocalPosition: {x: 3.376, y: 0, z: -5.059}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1426515972}
@@ -7418,7 +7418,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1968744431}
   m_LocalRotation: {x: -0, y: 0.010148674, z: -0, w: 0.9999485}
-  m_LocalPosition: {x: 3.1520498, y: 0, z: -4.969344}
+  m_LocalPosition: {x: 3.089, y: 0, z: -4.774}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1078644953}
@@ -7684,23 +7684,23 @@ MonoBehaviour:
   resolution: 5
   normalExtrusion: 20
   tangentExtrusion: 20
-  progress: 0.7871872
+  progress: 0.13929082
   vesselSpeed: 0.028
   duration: 15
   drawNormal: 0
   drawTangent: 0
   showControlPoints: 1
   useDuration: 0
-  currentPathSegmentDisplay: 24
-  currentSegmentDisplay: 121
+  currentPathSegmentDisplay: 4
+  currentSegmentDisplay: 22
 --- !u!4 &2031995332
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2031995330}
-  m_LocalRotation: {x: 0, y: 0.69706327, z: 0, w: 0.71700966}
-  m_LocalPosition: {x: 2.2027164, y: 0, z: -0.70495814}
+  m_LocalRotation: {x: 0, y: 0.9933829, z: 0, w: 0.11484992}
+  m_LocalPosition: {x: 0.9782955, y: 0, z: -2.006534}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 985166536}
