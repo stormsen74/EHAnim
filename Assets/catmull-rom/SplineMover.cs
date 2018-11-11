@@ -9,6 +9,7 @@ public class SplineMover : MonoBehaviour {
     public CatmullRom spline;
 
     public Transform[] controlPoints;
+    private Vector3[] linePoints;
 
     [Range(2, 25)]
     public int resolution = 6;
@@ -36,17 +37,18 @@ public class SplineMover : MonoBehaviour {
     private int currentSegment;
     public int currentSegmentDisplay = 0;
 
-    private TrailRenderer trail;
+    public LineRenderer lineRenderer;
+    public TrailRenderer trailRenderer;
 
     // ------------------
 
     void Start() {
 
-        trail = transform.GetComponentInChildren<TrailRenderer>();
-
         if (spline == null) {
             spline = new CatmullRom(controlPoints, resolution);
         }
+
+        UpdateLinePoints();
     }
 
 
@@ -72,6 +74,8 @@ public class SplineMover : MonoBehaviour {
         }
 
 
+
+
     }
 
 
@@ -83,18 +87,35 @@ public class SplineMover : MonoBehaviour {
         return vesselSpeed;
     }
 
+    private void UpdateLinePoints() {
+        //Debug.Log(spline.GetPoints().Length);
+        linePoints = new Vector3[spline.GetPoints().Length];
+
+        for (int i = 0; i < spline.GetPoints().Length; i++) {
+            //Debug.Log(spline.GetPoints()[i].position);
+            linePoints[i] = spline.GetPoints()[i].position;
+        }
+
+    }
+
     void Update() {
         if (spline != null) {
             spline.Update(controlPoints);
             spline.Update(resolution);
-            spline.DrawSpline(Color.white);
+            UpdateLinePoints();
+
+            //spline.DrawSpline(Color.white);
+
+            lineRenderer.positionCount = linePoints.Length;
+            lineRenderer.SetPositions(linePoints);
 
             if (drawNormal)
                 spline.DrawNormals(normalExtrusion, Color.red);
 
             if (drawTangent)
                 spline.DrawTangents(tangentExtrusion, Color.cyan);
-        } else {
+        }
+        else {
             spline = new CatmullRom(controlPoints, resolution);
         }
 
@@ -102,16 +123,9 @@ public class SplineMover : MonoBehaviour {
 
         if (progress < 1) {
             progress += Time.deltaTime * GetSpeed();
-            if (trail) {
-                if (!trail.emitting) {
-                    trail.Clear();
-                    trail.emitting = true;
-                }
-
-            }
-        } else {
+        }
+        else {
             progress = .01f;
-            if (trail) trail.emitting = false;
         }
 
         UpdatePosition(progress);
