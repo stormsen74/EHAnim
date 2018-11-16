@@ -854,7 +854,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93e96a7a5342b0349bef1fb48122b18c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  asset: {fileID: 4900000, guid: f974cd74b4eb36341ba88ff64e2d1f0d, type: 3}
+  asset: {fileID: 4900000, guid: bd72531072586c34eb2aae8d2a306021, type: 3}
 --- !u!4 &1146810030
 Transform:
   m_ObjectHideFlags: 0
@@ -880,7 +880,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controlPoints: []
-  resolution: 2
+  resolution: 20
   progress: 0
   vesselSpeed: 0
   duration: 60
