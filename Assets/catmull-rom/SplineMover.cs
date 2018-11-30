@@ -122,7 +122,7 @@ public class SplineMover : MonoBehaviour {
 
 
         if (progress < 1) {
-            progress += Time.deltaTime * GetSpeed();
+            progress += Time.deltaTime * GetTimeScale();
         }
         else {
             progress = .01f;
